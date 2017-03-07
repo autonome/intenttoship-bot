@@ -1,0 +1,30 @@
+{
+  "name": "intenttoship-bot",
+  "version": "1.0.0",
+  "description": "Bot for @intenttoship",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/autonome/intenttoship-bot.git"
+  },
+  "dependencies": {
+    "feed-to-tweet": "latest"
+  },
+  "keywords": [
+    "bots",
+    "twitter",
+    "feeds",
+    "web",
+    "browsers",
+    "node.js"
+  ],
+  "author": "Dietrich Ayala <autonome@gmail.com> (http://metafluff.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/autonome/intenttoship-bot/issues"
+  },
+  "homepage": "https://github.com/autonome/intenttoship-bot#readme"
+}
