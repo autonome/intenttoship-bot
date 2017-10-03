@@ -26,6 +26,15 @@ var feeds = [
       return 'Blink: ' + item.title + ' ' + item.link;
     }
   }
+  /*
+  // Test feed
+  {
+    feedURL: 'https://infinite-rss.glitch.me/?feedTitle=Intent%20To%20Ship&itemTitleBase=Intent%20to%20blah%20blah%20blah',
+    formatter: function(item) {
+      return 'Test: ' + item.title + ' ' + item.link;
+    }
+  }
+  */
 ];
 
 feedToTwitter({
@@ -35,3 +44,14 @@ feedToTwitter({
   checkIntervalMins: 60,
   tweetIntervalSecs: 10
 });
+
+/*
+// Debug config for testing
+feedToTwitter({
+  feeds: feeds,
+  twitterConfig: twitterCfg,
+  keywords: ['intent'],
+  checkIntervalMins: 6000,
+  tweetIntervalSecs: 10
+});
+*/
