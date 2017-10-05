@@ -11,7 +11,8 @@
     "url": "git+https://github.com/autonome/intenttoship-bot.git"
   },
   "dependencies": {
-    "feed-to-tweet": "latest"
+    "feed-to-tweet": "^0.0.4",
+    "express": "^4.16.1"
   },
   "keywords": [
     "bots",
