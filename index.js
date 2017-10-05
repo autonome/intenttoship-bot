@@ -1,6 +1,6 @@
 /*
 
-Example usage: Bot that powers the @intenttoship Twitter account.
+Bot that powers the @intenttoship Twitter account.
 
 */
 
@@ -26,32 +26,29 @@ var feeds = [
       return 'Blink: ' + item.title + ' ' + item.link;
     }
   }
-  /*
-  // Test feed
-  {
-    feedURL: 'https://infinite-rss.glitch.me/?feedTitle=Intent%20To%20Ship&itemTitleBase=Intent%20to%20blah%20blah%20blah',
-    formatter: function(item) {
-      return 'Test: ' + item.title + ' ' + item.link;
-    }
-  }
-  */
 ];
 
+// Kick it off
 feedToTwitter({
   feeds: feeds,
   twitterConfig: twitterCfg,
-  keywords: ['intent'],
+  searches: ['^intent to '],
   checkIntervalMins: 60,
   tweetIntervalSecs: 10
 });
 
-/*
-// Debug config for testing
-feedToTwitter({
-  feeds: feeds,
-  twitterConfig: twitterCfg,
-  keywords: ['intent'],
-  checkIntervalMins: 6000,
-  tweetIntervalSecs: 10
+// Pingable page
+var express = require('express');
+var app = express();
+app.get("/", function (request, response) {
+  response.sendFile(__dirname + '/views/index.html');
 });
-*/
+var listener = app.listen(process.env.PORT, function () {
+  console.log('Your app is listening on port ' + listener.address().port);
+});
+
+// Keepy uppy
+const http = require('http');
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
