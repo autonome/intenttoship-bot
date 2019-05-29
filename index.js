@@ -15,9 +15,10 @@ var twitterCfg = {
 
 function encodeLtGt(title) {
   return title.replace(/<|>/gm, function(i) {
-       return '&#'+i.charCodeAt(0)+';';
+    return '&#' + i.charCodeAt(0) + ';';
   });
 }
+
 var feeds = [
   {
     feedURL: 'https://groups.google.com/forum/feed/mozilla.dev.platform/topics/rss.xml?num=50',
