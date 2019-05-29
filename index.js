@@ -13,32 +13,37 @@ var twitterCfg = {
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 };
 
+function encodeLtGt(title) {
+  return title.replace(/<|>/gm, function(i) {
+       return '&#'+i.charCodeAt(0)+';';
+  });
+}
 var feeds = [
   {
     feedURL: 'https://groups.google.com/forum/feed/mozilla.dev.platform/topics/rss.xml?num=50',
     searches: ['^intent to '],
     formatter: function(item) {
-      return 'Gecko: ' + item.title + ' ' + item.link;
+      return 'Gecko: ' + encodeLtGt(item.title) + ' ' + item.link;
     }
   },
   {
     feedURL: 'https://groups.google.com/a/chromium.org/forum/feed/blink-dev/topics/rss.xml?num=50',
     searches: ['^intent to '],
     formatter: function(item) {
-      return 'Blink: ' + item.title + ' ' + item.link;
+      return 'Blink: ' + encodeLtGt(item.title) + ' ' + item.link;
     }
   },
   {
     feedURL: 'https://webkit.org/feed/atom/',
     searches: ['^Release Notes for Safari Technology Preview'],
     formatter: function(item) {
-      return 'Webkit: ' + item.title + ' ' + item.link;
+      return 'Webkit: ' + encodeLtGt(item.title) + ' ' + item.link;
     }
   },
   {
     feedURL: 'https://developer.microsoft.com/en-us/microsoft-edge/platform/status/rss/',
     formatter: function(item) {
-      return 'Edge: ' + item.title + ' ' + item.link;
+      return 'Edge: ' + encodeLtGt(item.title) + ' ' + item.link;
     }
   }
 ];
