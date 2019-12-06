@@ -6,12 +6,18 @@ Bot that powers the @intenttoship Twitter account.
 
 var feedToTwitter = require('feed-to-tweet');
 
-var twitterCfg = {
+let twitterCfg = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 };
+
+let botConfig = {
+  minsBetweenFeedChecks: 6000,
+  secsBetweenTweets: 10,
+  msBetweenKeepyUppy: 280000  // just under 5 mins
+}
 
 function encodeLtGt(title) {
   return title.replace(/<|>/gm, function(i) {
@@ -51,10 +57,11 @@ var feeds = [
 
 // Kick it off
 feedToTwitter({
+  debug: 1,
   feeds: feeds,
   twitterConfig: twitterCfg,
-  checkIntervalMins: 60,
-  tweetIntervalSecs: 10
+  checkIntervalMins: botConfig.minsBetweenFeedChecks,
+  tweetIntervalSecs: botConfig.secsBetweenTweets
 });
 
 // Pingable page
@@ -71,4 +78,4 @@ var listener = app.listen(process.env.PORT, function () {
 const http = require('http');
 setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
+}, botConfig.msBetweenKeepyUppy);
