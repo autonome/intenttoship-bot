@@ -14,7 +14,7 @@ let twitterCfg = {
 };
 
 let botConfig = {
-  minsBetweenFeedChecks: 6000,
+  minsBetweenFeedChecks: 60,
   secsBetweenTweets: 10,
   msBetweenKeepyUppy: 280000  // just under 5 mins
 }
