@@ -30,7 +30,7 @@ let feeds = [
   },
   */
   {
-    feedURL: 'https://groups.google.com/forum/feed/mozilla.dev.platform/topics/rss.xml?num=50',
+    feedURL: 'https://groups.google.com/a/mozilla.org/forum/feed/dev-platform/topics/rss.xml?num=50',
     searches: ['^intent to '],
     formatter: function(item) {
       return 'Gecko: ' + item.title + ' ' + item.link;
