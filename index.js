@@ -6,16 +6,31 @@ Bot that powers the @intenttoship Twitter account.
 
 var feedToTwitter = require('feed-to-tweet');
 
-var twitterCfg = {
+let twitterCfg = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 };
 
-var feeds = [
+let botConfig = {
+  minsBetweenFeedChecks: 60,
+  secsBetweenTweets: 10,
+  msBetweenKeepyUppy: 280000  // just under 5 mins
+}
+
+let feeds = [
+  /*
+  // test feed for <>
   {
-    feedURL: 'https://groups.google.com/forum/feed/mozilla.dev.platform/topics/rss.xml?num=50',
+    feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=element%20%3Celement%3E&itemCount=1',
+    formatter: function(item) {
+      return item.title + ' ' + item.link + ' ' + Date.now();
+    }
+  },
+  */
+  {
+    feedURL: 'https://groups.google.com/a/mozilla.org/forum/feed/dev-platform/topics/rss.xml?num=50',
     searches: ['^intent to '],
     formatter: function(item) {
       return 'Gecko: ' + item.title + ' ' + item.link;
@@ -45,10 +60,11 @@ var feeds = [
 
 // Kick it off
 feedToTwitter({
+  debug: 1,
   feeds: feeds,
   twitterConfig: twitterCfg,
-  checkIntervalMins: 60,
-  tweetIntervalSecs: 10
+  checkIntervalMins: botConfig.minsBetweenFeedChecks,
+  tweetIntervalSecs: botConfig.secsBetweenTweets
 });
 
 // Pingable page
@@ -65,4 +81,4 @@ var listener = app.listen(process.env.PORT, function () {
 const http = require('http');
 setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
+}, botConfig.msBetweenKeepyUppy);
