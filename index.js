@@ -23,10 +23,8 @@ let feeds = [
   /*
   // test feed for <>
   {
-    //feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=element%20%3Celement%3E&itemCount=1',
-    feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=foobly&itemCount=1',
+    feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=element%20%3Celement%3E&itemCount=1',
     formatter: function(item) {
-      console.log('test', item.title)
       return item.title + ' ' + item.link + ' ' + Date.now();
     }
   },
