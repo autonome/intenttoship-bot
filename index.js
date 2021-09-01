@@ -23,12 +23,15 @@ let feeds = [
   /*
   // test feed for <>
   {
-    feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=element%20%3Celement%3E&itemCount=1',
+    //feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=element%20%3Celement%3E&itemCount=1',
+    feedURL: 'https://infinite-rss.glitch.me/?itemTitleBase=foobly&itemCount=1',
     formatter: function(item) {
+      console.log('test', item.title)
       return item.title + ' ' + item.link + ' ' + Date.now();
     }
   },
   */
+  /*
   {
     feedURL: 'https://groups.google.com/a/mozilla.org/forum/feed/dev-platform/topics/rss.xml?num=50',
     searches: ['^intent to '],
@@ -36,9 +39,10 @@ let feeds = [
       return 'Gecko: ' + item.title + ' ' + item.link;
     }
   },
+  */
   {
-    feedURL: 'https://groups.google.com/a/chromium.org/forum/feed/blink-dev/topics/rss.xml?num=50',
-    searches: ['^intent to '],
+    feedURL: 'https://tomayac.blogspot.com/feeds/posts/default',
+    searches: ['^\\[blink-dev\\] Intent to '],
     formatter: function(item) {
       return 'Blink: ' + item.title + ' ' + item.link;
     }
@@ -60,7 +64,7 @@ let feeds = [
 
 // Kick it off
 feedToTwitter({
-  debug: 1,
+  debug: true,
   feeds: feeds,
   twitterConfig: twitterCfg,
   checkIntervalMins: botConfig.minsBetweenFeedChecks,
