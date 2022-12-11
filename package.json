@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "feed-to-tweet": "^0.0.7",
-    "express": "^4.16.1"
+    "express": "^4.17.3"
   },
   "keywords": [
     "bots",
