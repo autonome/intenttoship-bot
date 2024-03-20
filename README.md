@@ -1,30 +1,44 @@
 # intenttoship-bot
 
-* Bot for the @intenttoship Twitter account
-* Runs on Glitch.com at https://glitch.com/edit/#!/intent-to-ship-bot
+Bot which posts when browser makers announce their intent to ship, change or remove features in their web engines!
+
+* [@intenttoship@botsin.space on Mastodon](https://twitter.com/intenttoship/)
+* [@intenttoship on Twitter](https://twitter.com/intenttoship/)
+
+## Implementation
+
+Data sources and specific implementation described below, but mostly Gmail and Zapier. A job for each source, and a sub-zap for the webhook POST to Mastodon, and something replicates that to Twitter (note to self: figure out what you did here).
 
 ## Blink
 
-I subscribe to blink-dev and have a Zapier job which pulls out "intent to" messages from email
+Gmail account subscribed to blink-dev, then a Zapier job which pulls out "intent to" messages, and calls sub-zap
 
 ## Gecko
 
-I subscribe to mozilla-dev-platform and have a Zapier job which pulls out "intent to" messages from email
+Gmail account subscribed to mozilla-dev-platform, then a Zapier job which pulls out "intent to" messages, and calls sub-zap
 
 ## Webkit
 
-This bot pulls feed items matching '^Release Notes for Safari Technology Preview' from https://webkit.org/feed/atom/
+Zapier job that pulls feed items from https://webkit.org/blog/category/safari-technology-preview/feed/ cand calls sub-zap
 
 ## Edge
 
-This bot pulls feed items from https://developer.microsoft.com/en-us/microsoft-edge/platform/status/rss/
-
-(but i think is broken)
+Everything here is broken. Need new source.
 
 ## ???
 
 What else should @intenttoship tweet about?
 
+What other web engines should it report on?
+
 What other features would you like to see?
 
 File an issue in this repo!
+
+## Archive
+
+Original bot was code running here on Glitch:
+
+https://glitch.com/edit/#!/intent-to-ship-bot
+
+
