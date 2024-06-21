@@ -2,28 +2,32 @@
 
 Bot which posts when browser makers announce their intent to ship, change or remove features in their web engines!
 
+* [@intenttoship.dev on Bluesky](https://bsky.app/profile/intenttoship.dev)
 * [@intenttoship@botsin.space on Mastodon](https://twitter.com/intenttoship/)
 * [@intenttoship on Twitter](https://twitter.com/intenttoship/)
+* [RSS feed](https://botsin.space/@intenttoship.rss)
+
+Made by [@autonome](https://github.com/autonome/).
 
 ## Implementation
 
-Data sources and specific implementation described below, but mostly Gmail and Zapier. A job for each source, and a sub-zap for the webhook POST to Mastodon, and something replicates that to Twitter (note to self: figure out what you did here).
+Data sources are described in the Data Sources section below.
 
-## Blink
+Posting is done via Zapier.
 
-Gmail account subscribed to blink-dev, then a Zapier job which pulls out "intent to" messages, and calls sub-zap
+- Configure Zapier access to the email account, get notified on new messages or feed items
+- Zapier job for each source, with a single sub-zap that does the posting
+- Bluesky: The posting action executes [the JS in this gist](https://gist.github.com/autonome/96c809b1774651d5bbb2dcf07e38833e)
+- Mastodon: The posting action does webhook POST to botsin.space
+- RSS: Pulled from Mastodon at https://botsin.space/@intenttoship.rss
+- Twitter: Something pipes the RSS to Twitter (note to self: try and remember what you did here...)
 
-## Gecko
+## Data Sources
 
-Gmail account subscribed to mozilla-dev-platform, then a Zapier job which pulls out "intent to" messages, and calls sub-zap
-
-## Webkit
-
-Zapier job that pulls feed items from https://webkit.org/blog/category/safari-technology-preview/feed/ cand calls sub-zap
-
-## Edge
-
-Everything here is broken. Need new source.
+- Blink: Gmail account subscribed to blink-dev
+- Gecko: Gmail account subscribed to mozilla-dev-platform
+- Webkit: https://webkit.org/blog/category/safari-technology-preview/feed/ cand calls sub-zap
+- Edge: Everything here is broken. Need new source.
 
 ## ???
 
