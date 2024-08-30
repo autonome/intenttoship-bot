@@ -31,7 +31,7 @@ Posting is done via Zapier.
 
 ## Diagrammata
 
-![CleanShot 2024-08-30 at 09 55 01@2x](https://github.com/user-attachments/assets/78e96f99-1a1c-4073-9079-e56bd1e71f7f)
+![CleanShot 2024-08-30 at 09 57 33@2x](https://github.com/user-attachments/assets/b77583f5-046e-434b-981c-89927608bffd)
 
 ## ???
 
