@@ -29,6 +29,10 @@ Posting is done via Zapier.
 - Webkit: https://webkit.org/blog/category/safari-technology-preview/feed/ cand calls sub-zap
 - Edge: Everything here is broken. Need new source.
 
+## Diagrammata
+
+![CleanShot 2024-08-30 at 09 55 01@2x](https://github.com/user-attachments/assets/78e96f99-1a1c-4073-9079-e56bd1e71f7f)
+
 ## ???
 
 What else should @intenttoship tweet about?
