@@ -3,7 +3,7 @@
 Bot which posts when browser makers announce their intent to ship, change or remove features in their web engines!
 
 * [@intenttoship.dev on Bluesky](https://bsky.app/profile/intenttoship.dev)
-* [@intenttoship@botsin.space on Mastodon](https://twitter.com/intenttoship/)
+* [@intenttoship@botsin.space on Mastodon](https://botsin.space/@intenttoship)
 * [@intenttoship on Twitter](https://twitter.com/intenttoship/)
 * [RSS feed](https://botsin.space/@intenttoship.rss)
 
