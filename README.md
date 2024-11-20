@@ -19,7 +19,7 @@ Posting is done via Zapier.
 - Zapier job for each source, with a single sub-zap that does the posting
 - Bluesky: The posting action executes [the JS in this gist](https://gist.github.com/autonome/96c809b1774651d5bbb2dcf07e38833e)
 - Mastodon: The posting action does webhook POST to botsin.space
-- RSS: Pulled from Mastodon at https://botsin.space/@intenttoship.rss
+- RSS: Pulled from Bluesky at https://bsky.app/profile/did:plc:cs3zn3kikj5kwzljlvyr55sg/rss
 - Twitter: Something pipes the RSS to Twitter (note to self: try and remember what you did here...)
 
 ## Data Sources
