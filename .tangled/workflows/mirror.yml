@@ -1,0 +1,53 @@
+# Push-mirror this repo to GitHub on every push, so GitHub Pages keeps serving
+# its custom domain while Tangled is the source of truth.
+#
+# Copy to .tangled/workflows/mirror.yml and set GITHUB_REPO. The repo needs:
+#   - a write-enabled GitHub deploy key, private half base64-encoded on one line
+#     in the Tangled repo secret GITHUB_MIRROR_KEY_B64
+#   - its spindle set to the self-hosted one (infra/spindle/)
+#
+# Deletions do not propagate: the knot compiles no pipeline for a push whose new
+# sha is zero, so a deleted branch or tag stays on GitHub until removed there.
+# Pushes are fast-forward only; a GitHub branch that has diverged fails the run
+# rather than being overwritten.
+
+when:
+  - event: ["push"]
+    branch: ["**"]
+    tag: ["**"]
+  - event: ["manual"]
+
+engine: "nixery"
+
+dependencies:
+  nixpkgs: [git, openssh, coreutils]
+
+environment:
+  GITHUB_REPO: "autonome/intenttoship-bot"
+
+steps:
+  - name: fetch all branches and tags
+    # The clone step fetches only the triggering commit at depth 1, with origin
+    # pointing at the knot. HEAD is detached, so fetching into refs/heads is safe.
+    command: |
+      git fetch --unshallow --prune origin \
+        '+refs/heads/*:refs/heads/*' '+refs/tags/*:refs/tags/*' \
+        || git fetch --prune origin \
+        '+refs/heads/*:refs/heads/*' '+refs/tags/*:refs/tags/*'
+
+  - name: push to github
+    command: |
+      set -euo pipefail
+      # The nixery image has no passwd entry for the step's uid, and OpenSSH
+      # refuses to run without one ("No user exists for uid 0").
+      grep -q "^[^:]*:[^:]*:$(id -u):" /etc/passwd 2>/dev/null \
+        || echo "ci:x:$(id -u):$(id -g)::/tmp:/bin/sh" >> /etc/passwd
+      umask 077
+      d=$(mktemp -d)
+      printf '%s' "$GITHUB_MIRROR_KEY_B64" | base64 -d > "$d/key"
+      # GitHub's published host key (api.github.com/meta ssh_keys); pinned so
+      # the push cannot be redirected.
+      echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > "$d/known_hosts"
+      export GIT_SSH_COMMAND="ssh -i $d/key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$d/known_hosts"
+      git push "git@github.com:$GITHUB_REPO.git" \
+        'refs/heads/*:refs/heads/*' 'refs/tags/*:refs/tags/*'
